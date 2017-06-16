@@ -2,7 +2,8 @@
 layout: default
 section_id: home
 slides:
-  - bg: images/@stock/slide-1.jpg
+  - bg: images/content/carousel-1.jpg
+    klass: centered-text
     small_title:
       klass: bottom-to-top
       text: Scott Hamilton Custom Builders
@@ -14,7 +15,7 @@ slides:
       items:
         - text: Schedule Your Free Consultation
           link_to: /contact.html
-  - bg: images/@stock/slide-4.jpg
+  - bg: images/content/carousel-3.jpg
     klass: centered-text
     small_title:
       klass: bottom-to-top
@@ -30,7 +31,7 @@ slides:
           link_to: /portfolio.html
         - text: Schedule Now
           link_to: /contact.html
-  - bg: images/@stock/slide-5.jpg
+  - bg: images/content/carousel-2.jpg
     small_title:
       klass: bottom-to-top
       text: Delighting our commercial clients
@@ -47,42 +48,42 @@ slides:
 
 works:
   - image: images/@stock/work-1.jpg
-    title: Beautiful Girl
+    title: Beautiful Home
     link_to: portfolio-item.html
     klass: graphi-design
     desc: Design &amp; Development
   - image: images/@stock/work-2.jpg
-    title: Beautiful Girl
+    title: Beautiful Home
     link_to: portfolio-item.html
     klass: graphi-design
     desc: Design &amp; Development
   - image: images/@stock/work-3.jpg
-    title: Beautiful Girl
+    title: Beautiful Home
     link_to: portfolio-item.html
     klass: graphi-design
     desc: Design &amp; Development
   - image: images/@stock/work-4.jpg
-    title: Beautiful Girl
+    title: Beautiful Home
     link_to: portfolio-item.html
     klass: graphi-design
     desc: Design &amp; Development
   - image: images/@stock/work-5.jpg
-    title: Beautiful Girl
+    title: Beautiful Home
     link_to: portfolio-item.html
     klass: graphi-design
     desc: Design &amp; Development
   - image: images/@stock/work-6.jpg
-    title: Beautiful Girl
+    title: Beautiful Home
     link_to: portfolio-item.html
     klass: graphi-design
     desc: Design &amp; Development
   - image: images/@stock/work-7.jpg
-    title: Beautiful Girl
+    title: Beautiful Home
     link_to: portfolio-item.html
     klass: graphi-design
     desc: Design &amp; Development
   - image: images/@stock/work-8.jpg
-    title: Beautiful Girl
+    title: Beautiful Home
     link_to: portfolio-item.html
     klass: graphi-design
     desc: Design &amp; Development
@@ -90,13 +91,13 @@ works:
 
 services:
   - icon: trophy
-    title: Web Design
+    title: Custom Design
     desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
   - icon: cogs
-    title: Web Development
+    title: Building
     desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
   - icon: pagelines
-    title: Branding
+    title: Floor Plans
     desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
   - icon: lock
     title: Security
@@ -110,7 +111,7 @@ milestones:
   - icon: coffee
     from: 0
     to: 726
-    title: Cups of coffee offered
+    title: Awards won
   - icon: thumbs-up
     from: 0
     to: 59
@@ -151,14 +152,14 @@ milestones:
 
         <li class='frame {{style}} {{ slide.klass }}'>
           <div class='bg' style='background-image: url({{ slide.bg}});'></div>
-          <div class='small-title {{ slide.small_title.klass }}'>
+          <div class='small-title {{ slide.small_title.klass }}' style="text-shadow: 2px 2px 2px #000">
             <div class='row'>
               <div class='large-12 columns'>
                 <h2>{{ slide.small_title.text }}</h2>
               </div>
             </div>
           </div>
-          <div class='title {{ slide.title.klass }}'>
+          <div class='title {{ slide.title.klass }}' style="text-shadow: 2px 2px 2px #000">
             <div class='row'>
               <div class='large-12 columns'>
                 <h2>{{ slide.title.text }}</h2>
@@ -401,10 +402,10 @@ milestones:
   <div class='mod modCallToAction'>
     <div class='row'>
       <div class='medium-9 large-9 columns'>
-        <p>Like what you see here? Checkout this theme and start to build your site immediately.</p>
+        <p>Like what you see here? Contact us to kickoff your project.</p>
       </div>
       <div class='medium-3 large-3 columns'>
-        <a class='button' href='http://themeforest.net/user/honryou/portfolio?ref=honryou'>Learn more</a>
+        <a class='button' href='/contact.html'>Contact Us</a>
       </div>
     </div>
   </div>
