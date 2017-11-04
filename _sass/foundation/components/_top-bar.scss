@@ -17,7 +17,7 @@ $topbar-bg-color: $oil !default;
 $topbar-bg: $topbar-bg-color !default;
 
 // Height and margin
-$topbar-height: rem-calc(45) !default;
+$topbar-height: 0;//rem-calc(45) !default;
 $topbar-margin-bottom: 0 !default;
 
 // Controlling the styles for the title in the top bar
@@ -169,11 +169,11 @@ $topbar-dropdown-arrows: true !default; //Set false to remove the \00bb >> text 
       form,
       input { margin-bottom: 0; }
 
-      input { 
-        height: $topbar-input-height; 
-        padding-top: .35rem; 
-        padding-bottom: .35rem; 
-        font-size: $topbar-button-font-size; 
+      input {
+        height: $topbar-input-height;
+        padding-top: .35rem;
+        padding-bottom: .35rem;
+        font-size: $topbar-button-font-size;
       }
 
       .button, button {

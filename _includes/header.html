@@ -1,10 +1,10 @@
-<div class='contain-to-grid sticky'>
-  <nav class='top-bar' data-options='sticky_on: large' data-topbar=''>
+<div class='contain-to-grid sticky' style="height: 0; background: transparent;">
+  <nav class='top-bar' data-options='sticky_on: large' data-topbar='' style="height: 0; background: transparent;">
     <ul class='title-area'>
       <li class='name'>
         <h1>
-          <a href='{{site.url}}/index.html'>
-            <img alt="" src="{{site.url}}/images/logo-bordered.png" />
+          <a href='{{site.url}}/index.html' style="margin-top: -4px;">
+            <img alt="" src="{{site.url}}/images/logo-100.jpg" />
           </a>
         </h1>
       </li>
@@ -12,7 +12,7 @@
         <a href='#'>Menu</a>
       </li>
     </ul>
-    <section class='top-bar-section'>
+    <section style="display: none;" class='top-bar-section'>
       <ul class="right">
         {% for item in site.data.nav %}
           {% if item.section_id == page.section_id %}
@@ -40,5 +40,21 @@
         {% endfor %}
       </ul>
     </section>
+    <ul class='title-area right'>
+      <li class='name'>
+        <h1>
+          <a style="background: white;
+            border: 1px solid;
+            margin-top: -25px;
+            font-size: 22px;
+            font-weight: bold;
+            height: 80px;
+            border-right: 0;"
+          href='mailto:contact@trusthamilton.com'>
+            Contact
+          </a>
+        </h1>
+      </li>
+    </ul>
   </nav>
 </div>

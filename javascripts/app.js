@@ -60,13 +60,13 @@ jQuery(document).foundation();
     $(window).scroll(function() {
 
       var scroll = $(window).scrollTop();
-
+/*
       if ( scroll >= 40 ) {
         $('body').addClass('shrink');
       } else {
         $('body').removeClass('shrink');
       }
-
+*/
     });
 
     $('form#contact_form').validate({
@@ -745,10 +745,10 @@ jQuery(document).foundation();
   })
 })(Tc.$);
 (function($) {
-  Tc.Module.SectionHeader = Tc.Module.extend({    
+  Tc.Module.SectionHeader = Tc.Module.extend({
     init: function($ctx, sandbox, modId) {
       this._super($ctx, sandbox, modId);
-    },    
+    },
     dependencies: function() {
     },
     onBinding: function() {
@@ -797,5 +797,3 @@ jQuery(document).foundation();
     }
   })
 })(Tc.$);
-
-
