@@ -114,22 +114,18 @@ services:
     desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
 
 milestones:
-  - icon: folder-open
+  - icon: legal
     from: 0
-    to: 69
+    to: 105
+    title: Combined Years Experience
+  - icon: home
+    from: 0
+    to: 614
     title: Projects Completed
-  - icon: coffee
+  - icon: trophy
     from: 0
-    to: 726
-    title: Awards won
-  - icon: thumbs-up
-    from: 0
-    to: 59
-    title: Happy clients
-  - icon: file-text
-    from: 0
-    to: 21
-    title: Articles Published
+    to: 41
+    title: Awards Won
 
 ---
 
@@ -277,20 +273,20 @@ milestones:
 </div>
 -->
 
-<div style="display:none;" class='full parallax' style='background-image: url(images/@stock/milestone-bg.jpg); color: #fff;'>
+<div class='full parallax' style='background-color: #ccc; color: #fff;'>
   <div class='row'>
     <div class='large-12 columns'>
-      {% include section-header.html title="Parallax effect" color="#fff" %}
+      {% include section-header.html title="The Hamilton Difference" color="#fff" %}
       <div class='spacing'></div>
-      <p class='centered-text' style='color: #ccc;'>
-        Dolore magna aliquam erat volutpat consectetuer sit amet magna adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat consectetuer sit amet magna adipiscing.
+      <p class='centered-text' style='color: #000;'>
+        Hamilton Group, formerly Scott Hamilton Custom Builders
       </p>
       <div class='two spacing'></div>
     </div>
   </div>
   <div class='row'>
     {% for milestone in page.milestones %}
-      <div class='medium-3 large-3 columns'>
+      <div class='medium-4 large-4 columns'>
         <div class='mod modMilestone'>
           <i class='fa fa-{{milestone.icon}}'></i>
           <strong data-from='{{milestone.from}}' data-to='{{milestone.to}}'>&nbsp;</strong>
