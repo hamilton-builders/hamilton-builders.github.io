@@ -10,8 +10,8 @@
 - name: About
   path: about.html
   section_id: about
-- name: Homes for sale
-  path: sale.html
+# - name: Homes for sale
+#   path: sale.html
   section_id: sale
 - name: Our Process
   path: process.html
