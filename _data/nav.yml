@@ -4,9 +4,9 @@
 - name: Gallery
   path: index.html
   section_id: portfolio
-- name: Services
-  path: services.html
-  section_id: services
+# - name: Services
+#   path: services.html
+#   section_id: services
 - name: About
   path: about.html
   section_id: about

@@ -54,8 +54,13 @@ slides:
       items:
         - text: Schedule Your Free Consultation
           link_to: mailto:contact@trusthamilton.com
-
-
+testimonials:
+  - quote: "We expected to get exactly what we wanted in a home, and we did. Our favorite aspect is that everyone naturally gravitates to the extended kitchen. The two butler’s pantries make serving so easy. The portico outside the sun room and family room, overlooking the pool and hearth, is like an extension of the inside, comfortable in all weather. Scott had the people and the expertise to make it all come together for us."
+    author: Exactly What We Wanted, Longview, TX
+  - quote: "We never built before. People say it strains a marriage, but Scott’s people made it a pleasant experience. Becky took me to the decorator’s market in Dallas. The supervisor found a talented artist to paint a tapestry on the vault leading to the parlor. Everything is wonderfully unique."
+    author: Pleasant Experience, Kilgore, TX
+  - quote: "This company is known for excellent woodwork, molding, hardwood floors, and such— quality in every detail. Our door frames are different from the neighbors’, as you would expect in a custom home. All the craftsmen listened to us and figured a way to give us what we wanted—for instance, rag-technique painting, and the family monogram laid in parquet at hallway inter-sections. You can’t plan every detail in advance, but have to rely on the integrity of the builder for getting things right."
+    author: Quality in Every Detail, Hallsville, TX
 works:
   - image: images/portfolio/craftsman-sanctuary-display-1.jpg
     title: Craftsman Sanctuary
@@ -126,6 +131,27 @@ milestones:
     from: 0
     to: 41
     title: Awards Won
+
+services_left:
+  - icon: trophy
+    title: Custom Site Planning
+    desc: Site planning in landscape architecture and architecture refers to the organizational stage of the landscape design process. It involves the organization of land use zoning, access, circulation, privacy, security, shelter, land drainage, and other factors. This is done by arranging the compositional elements of landform, planting, water, buildings and paving and building in site plans.
+  - icon: wrench
+    title: Specialty Products
+    desc: We have strategic partnerships with quality products that past clients have found to be valuable additions to their projects. Let us know if you see something you like or want to suggest something.
+  - icon: building
+    title: Commercial
+    desc: Whether its rebuilding a new office or remodeling existing apartments, we are dedicated to making your project a success by leveraging our decades of experience.
+services_right:
+  - icon: cogs
+    title: Renovations
+    desc: The unexpected surprises of renovation are a problem for a production-minded, new home supervisor who is process-oriented and has his plate full with multiple projects. For a Renovation Specialist, dealing with the unexpected is merely a part of the process.
+  - icon: image
+    title: Custom Interior Design
+    desc: Interior design describes all the related aspects of design involved in creating a functional interior environment that is aesthetically pleasing and enhances your quality of life.  Interior design includes conceptual development, spatial planning, materials selections, and execution of the design.
+  - icon: home
+    title: Residential
+    desc: We have been serving the people of the greater Longview area for decades by bringing their dream homes to reality. Let us know what we can help you with.
 
 ---
 
@@ -269,11 +295,11 @@ milestones:
 </div>
 
 
-<div class="full" style="background: #f5f5f5;" id="homebuilders">
+<div class="full" style="background: #f5f5f5;">
 
   <div class="row">
     <div class="large-12 columns">
-      {% include section-header.html title="Our works" %}
+      {% include section-header.html title="Gallery" %}
       <div class="spacing"></div>
       <!--
       <p>
@@ -284,7 +310,7 @@ milestones:
     </div>
   </div>
 
-  <div class="mod modGallery">
+  <div id="homebuilders" class="mod modGallery">
     <ul class="gallery small-block-grid-2 medium-block-grid-3 large-block-grid-4">
       {% for work in page.works %}
         <li class="{{ work.klass }}">
@@ -303,6 +329,71 @@ milestones:
   </div>
 </div>
 
+<div class='full'>
+  <div class='row'>
+    <div class='medium-6 columns'>
+      {% for service in page.services_left %}
+        <div class='fadein mod modIconText' data-delay='{{ 300 | times:forloop.index0 }}'>
+          <div class='icon-text-simple'>
+            <i class='fa fa-{{service.icon}}'></i>
+            <h3>{{service.title}}</h3>
+            <p>{{service.desc}}</p>
+          </div>
+          <div class='two spacing'></div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class='medium-6 columns'>
+      {% for service in page.services_right %}
+        <div class='fadein mod modIconText' data-delay='{{ 300 | times:forloop.index0 }}'>
+          <div class='icon-text-simple'>
+            <i class='fa fa-{{service.icon}}'></i>
+            <h3>{{service.title}}</h3>
+            <p>{{service.desc}}</p>
+          </div>
+          <div class='two spacing'></div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class='spacing'></div>
+</div>
+
+<div class='full parallax' style='background: #f5f5f5'>
+  <div class='row'>
+    <div class='large-12 columns'>
+      <p class='centered-text'>
+        <i class='fa fa-quote-left' style='color: #F9CE06; font-size: 36px;'></i>
+      </p>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='large-12 columns'>
+      {% include section-header.html title="What our clients say" %}
+      <div class='spacing'></div>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='large-12 columns'>
+      <div class='mod modTestimonials'>
+        <div class='row'>
+          <div class='small-12 columns'>
+            <div class='items centered-text'>
+              {% for testimonial in page.testimonials %}
+                <div class='item'>
+                  <p class='quote'>"{{testimonial.quote}}"</p>
+                  <p class='author'>- {{testimonial.author}}</p>
+                  <div class='two spacing'></div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class='spacing'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--
 <div class='full'>
