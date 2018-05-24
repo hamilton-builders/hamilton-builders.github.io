@@ -1,127 +1,155 @@
 ---
 layout: default
-title: About
+title: Our Process
 section_id: process
-skills:
-  - title: Custom Design
-    percentage: 84
-  - title: Commercial
-    percentage: 95
-  - title: Site Management
-    percentage: 70
-  - title: Floor Plan
-    percentage: 61
-testimonials:
-  - quote: Reprehenderit eos et non et ut eum reprehenderit quis sequi quia vel repellendus id. Velit quit blanditiis dolor quam error eos dolores sequi eaque rerum est. Velit quit blanditiis dolor quam error eos dolores sequi eaque rerum est.
-    author: David White, Designer at Huglab
-  - quote: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat consectetuer sit amet magna adipiscing.
-    author: David White, Designer at Huglab
-  - quote: Reprehenderit eos et non et ut eum reprehenderit quis sequi quia vel repellendus id. Velit quit blanditiis dolor quam error eos dolores sequi eaque rerum est.
-    author: David White, Designer at Huglab
+slides:
+  - bg: images/home/name-you-can-trust.jpg
+    klass: centered-text
+    small_title:
+      klass: bottom-to-top
+      text: Hamilton Group
+    title:
+      klass: bottom-to-top
+      text: A Name You Can Trust
+    buttons:
+      klass: bottom-to-top
+      items:
+        - text: Schedule Your Free Consultation
+          link_to: mailto:contact@trusthamilton.com
+  - bg: images/home/team-you-can-trust.jpg
+    klass: centered-text
+    small_title:
+      klass: bottom-to-top
+      text: Hamilton Group
+    title:
+      klass: bottom-to-top
+      text: A Team You Can Trust
+    buttons:
+      klass: bottom-to-top
+      items:
+        - text: Schedule Your Free Consultation
+          link_to: mailto:contact@trusthamilton.com
+  - bg: images/home/design-you-can-trust.jpg
+    klass: centered-text
+    small_title:
+      klass: bottom-to-top
+      text: Hamilton Group
+    title:
+      klass: bottom-to-top
+      text: A Design You Can Trust
+    buttons:
+      klass: bottom-to-top
+      items:
+        - text: Schedule Your Free Consultation
+          link_to: mailto:contact@trusthamilton.com
+  - bg: images/home/home-you-can-trust.jpg
+    klass: centered-text
+    small_title:
+      klass: bottom-to-top
+      text: Hamilton Group
+    title:
+      klass: bottom-to-top
+      text: A Home You Can Trust
+    buttons:
+      klass: bottom-to-top
+      items:
+        - text: Schedule Your Free Consultation
+          link_to: mailto:contact@trusthamilton.com
 ---
 
-<div class='full parallax' style='background-image: url(images/@stock/about-us.jpg); color: #fff;'>
-  <div class='row'>
-    <div class='twelve columns'>
-      {% include section-header.html title="About us" color="#fff" tagline="Know something about our team" class="big" %}
-    </div>
-  </div>
-  <div class='four spacing'></div>
-</div>
+<div class='mod modDefaultSlider' style="height: 100% !important;">
+  <div class='sequence' data-autostop='off' data-timeout='5000' style="height: 100% !important;">
+    <a class='sequence-prev' href='javascript:void(0);'>
+      <span></span>
+    </a>
+    <a class='sequence-next' href='javascript:void(0);'>
+      <span></span>
+    </a>
+    <ul id="homebuilders" class='sequence-pagination'>
+      {% for slide in page.slides %}
+        {% if forloop.first %}
+          {% assign class = 'current' %}
+        {% else %}
+          {% assign class = '' %}
+        {% endif %}
+        <li class="{{class}}"></li>
+      {% endfor %}
+    </ul>
+    <ul class='sequence-canvas'>
+      {% for slide in page.slides %}
+        {% if forloop.first %}
+          {% assign style = 'static' %}
+        {% else %}
+          {% assign style = '' %}
+        {% endif %}
 
-<div class='full'>
-  <div class='row'>
-    <div class='medium-6 columns'>
-      <h3>Our history</h3>
-      <p>Consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat consectetuer sit amet magna adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat consectetuer sit amet magna adipiscing.</p>
-      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat consectetuer sit amet magna adipiscing.</p>
-    </div>
-    <div class='medium-6 columns'>
-      <h3>Our skills</h3>
-      <div class='mod modBarGraph'>
-        <ul class='bars'>
-          {% for skill in page.skills %}
-            <li>
-              <h4 style=''>
-                {{skill.title}}
-                <strong>{{skill.percentage}}%</strong>
-              </h4>
-              <p class='highlighted' data-percent='{{skill.percentage}}'></p>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class='full'>
-  <div class='row'>
-    {% for member in site.data.members %}
-      <div class='small-6 medium-3 large-3 columns'>
-        <div class='mod modTeamMember'>
-          <div class='member'>
-            <img class="avatar" alt="" src="{{ member.avatar }}" />
-            <div class='overlay'>
-              <div class='intro'>
-                <h3>{{member.name}}</h3>
-                <p>{{member.position}}</p>
-                <ul class='socials'>
-                  {% for social in member.socials %}
-                    <li>
-                      <a href='{{social.link}}'>
-                        <i class='fa fa-{{social.icon}}'></i>
-                      </a>
-                    </li>
-                  {% endfor %}
-                </ul>
+        <li class='frame {{style}} {{ slide.klass }}'>
+          <div class='bg' style='background-image: url({{ slide.bg}});'></div>
+          <div class='small-title {{ slide.small_title.klass }}' style="margin-top: 102px; text-shadow: 2px 2px 2px #000">
+            <div class='row'>
+              <div class='large-12 columns'>
+                <h2 style="font-size: 3rem;">{{ slide.small_title.text }}</h2>
               </div>
             </div>
           </div>
-          <p class='centered-text'>{{member.desc}}</p>
-          <div class='two spacing'></div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-
-
-<div class='full parallax' style='background: #f5f5f5'>
-  <div class='row'>
-    <div class='large-12 columns'>
-      <p class='centered-text'>
-        <i class='fa fa-quote-left' style='color: #F9CE06; font-size: 36px;'></i>
-      </p>
-    </div>
-  </div>
-  <div class='row'>
-    <div class='large-12 columns'>
-      {% include section-header.html title="What our clients say" %}
-      <div class='spacing'></div>
-    </div>
-  </div>
-  <div class='row'>
-    <div class='large-12 columns'>
-      <div class='mod modTestimonials'>
-        <div class='row'>
-          <div class='small-12 columns'>
-            <div class='items centered-text'>
-              {% for testimonial in page.testimonials %}
-                <div class='item'>
-                  <p class='quote'>"{{testimonial.quote}}"</p>
-                  <p class='author'>- {{testimonial.author}}</p>
-                  <div class='two spacing'></div>
-                </div>
-              {% endfor %}
+          <div class='title {{ slide.title.klass }}' style="text-shadow: 2px 2px 2px #000">
+            <div class='row'>
+              <div class='large-12 columns'>
+                <h2>{{ slide.title.text }}</h2>
+              </div>
             </div>
           </div>
-          <div class='spacing'></div>
-        </div>
-      </div>
+          <div class='buttons-wrapper {{ slide.buttons.klass }}'>
+            <div class='row'>
+              <div class='large-12 columns'>
+                <div class='two spacing'></div>
+                {% for button in slide.buttons.items %}
+                  <a class='button {{ button.klass }}' href='{{ button.link_to }}'>{{ button.text }}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class='full parallax'>
+  <div class='row'>
+    <div class='large-12 columns'>
+      <h3>Design Build Process</h3>
+      <p>We’re often asked about the advantages of design-build over the conventional system of architect and general contractor. It’s a great question and with over a decade of design-build experience under our belts, we feel like it’s a good time to call out our top reasons why the design-build system is so good.</p>
+      <ol>
+        <li><strong>Everybody is on the same team:</strong> We’re all in this together and we all have the same goal –to arrive at a successful project that meets or exceeds the client’s expectations for their project. When challenges are encountered on a project (and there are always challenges), pointing fingers is not an option, everyone rolls up their sleeves and works on solutions.</li>
+        <li><strong>Total accountability:</strong> One entity is accountable for everything –including how the end result looks, how much it costs and the timeline of completion. When the same group that designs the project also builds the project, there tends to be much more attention given to pricing and scheduling in the design phase. The cost of everything is taken into account early on in the process; all fees, construction costs, utilities, landscaping allowances –everything.</li>
+        <li><strong>Design-build focuses on results, not excuses:</strong> Unfortunately, it’s not unusual for us to hear from people that “their remodel cost twice as much as the architect said it would” –such a scenario is entirely unacceptable in the design-build world.</li>
+        <li><strong>Continuity:</strong> A design-build firm is involved from start to finish, which adds an inherent efficiency. The chance for things to fall through the cracks is greatly diminished.</li>
+        <li><strong>Expertise:</strong> Design-build firms are experts in both fields. They should have educated, experienced designers.  They should also have professional experience in construction and understand pricing, sequencing and how buildings go together. There is a tremendous advantage to working with design and building together.</li>
+        <li><strong>Appropriate design detail:</strong>  There is a huge difference between the design and plans that typically are produced by a local plan designer and those produced by a licensed architect or engineer.  The plans provided by the local designer might consist or four or five pages of drawings with very little detail and cost under $1.00 per square foot.  The plans produced by an architect may have dozens of pages of plans and details and scores of pages of detailed specifications and cost 7% - 8% of the total project cost. Design – Build lets us produce the detailed plans and specifications necessary to  construct the home you are dreaming of, but at a cost that is in  between the low price of a local plan shop and the much higher cost of an architectural firm. The 4 or 5 pages of plans is never enough information to ensure that you get your project to turn out the way you want it to.  On the other hand a very experienced builder doesn’t need all the numerous construction details, construction drawings etc. which are included  in the very costly set of drawings to build a great project because he knows from experience how to do the job correctly.   Our 3-D software lets you see what the house will really look like when it is finished, and that enables you to make good decisions without the fear that you might not be happy with the finished product.</li>
+        <li><strong>The best kind of communication is open, honest and often:</strong> Design-build is transparent because we want clients to understand the process and to know what’s going on. The best partnerships work, not because people say what everyone wants to hear, but because they say what everyone needs to hear. Through clear communication the budget is defined early on and it becomes the agreement for the entire project.</li>
+        <li><strong>Time is of the essence:</strong> Design and construction involves managing hundreds of timelines that need to coordinate in lockstep. Design-build creates opportunities for clients to sit with big decisions, ask questions, and consider their options. Anything the team can do to avoid taking steps backwards is going to lead to better, faster and more cost-effective results. The design-build system is highly adaptive and responsive in the field. Big decisions can be revisited during construction without change orders or additional fees. The conventional story is that if you make changes it will cost you money – not necessarily so in design-build.</li>
+        <li><strong>Cost savings:</strong> Inherent to the design-build model is a savings of approximately 10% of the project costs.</li>
+      </ol>
     </div>
   </div>
 </div>
 
-{% include our-customers.html %}
+<!-- {% include our-customers.html %} -->
+<div class='full no-padding' style='background: #fff'>
+  <div class='two spacing'></div>
+  <div class='mod modCallToAction'>
+    <div class='row'>
+      <div class='medium-9 large-9 columns'>
+        <p>Like what you see here? Contact us to kickoff your project.</p>
+      </div>
+      <div class='medium-3 large-3 columns'>
+        <a class='button' href='mailto:contact@trusthamilton.com'>Contact Us</a>
+      </div>
+    </div>
+    <div class="row" style="text-align: center;">
+      <a href="https://www.google.com/maps/place/Scott+Hamilton+Custom+Builder/@32.5239656,-94.6940699,17z/data=!4m13!1m7!3m6!1s0x8636472405aca26d:0x8f91a36152579715!2s1625+E+Loop+281,+Longview,+TX+75605!3b1!8m2!3d32.5239656!4d-94.6918812!3m4!1s0x8636472127619ddd:0x9fc537a91042249!8m2!3d32.522825!4d-94.688909">1625 E. Loop 281 Longview, Tx 75605</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="tel">(903) 738-4741</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="mailto:contact@trusthamilton.com">contact@trusthamilton.com</a>
+    </div>
+  </div>
+  <div class='spacing'></div>
+</div>

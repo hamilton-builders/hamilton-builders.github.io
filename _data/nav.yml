@@ -2,7 +2,7 @@
 #   path: index.html
 #   section_id: home
 - name: Gallery
-  path: portfolio.html
+  path: index.html
   section_id: portfolio
 - name: Services
   path: services.html

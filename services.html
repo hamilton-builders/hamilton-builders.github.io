@@ -4,41 +4,136 @@ title: Services
 section_id: services
 services_left:
   - icon: trophy
-    title: Custom Design
-    desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
+    title: Custom Site Planning
+    desc: Site planning in landscape architecture and architecture refers to the organizational stage of the landscape design process. It involves the organization of land use zoning, access, circulation, privacy, security, shelter, land drainage, and other factors. This is done by arranging the compositional elements of landform, planting, water, buildings and paving and building in site plans.
   - icon: cogs
-    title: Building
-    desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
-  - icon: pagelines
-    title: Floor Plans
-    desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
+    title: Custom Interior Design
+    desc: Interior design describes all the related aspects of design involved in creating a functional interior environment that is aesthetically pleasing and enhances your quality of life.  Interior design includes conceptual development, spatial planning, materials selections, and execution of the design.
   - icon: lock
     title: Commercial
     desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
 services_right:
-  - icon: compass
-    title: Security
-    desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
+  - icon: pagelines
+    title: Renovations
+    desc: The unexpected surprises of renovation are a problem for a production-minded, new home supervisor who is process-oriented and has his plate full with multiple projects. For a Renovation Specialist, dealing with the unexpected is merely a part of the process.
   - icon: image
-    title: Repairs
+    title: Specialty Products
     desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
   - icon: database
-    title: Products
+    title: Residential
     desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
-  - icon: film
-    title: Other
-    desc: Acusamus laborum totam omnis inventore et error aut et eos aut. fuga mollitia vitae id enim omnis perspiciatis. modi maxime eos.
+
+slides:
+  - bg: images/home/name-you-can-trust.jpg
+    klass: centered-text
+    small_title:
+      klass: bottom-to-top
+      text: Hamilton Group
+    title:
+      klass: bottom-to-top
+      text: A Name You Can Trust
+    buttons:
+      klass: bottom-to-top
+      items:
+        - text: Schedule Your Free Consultation
+          link_to: mailto:contact@trusthamilton.com
+  - bg: images/home/team-you-can-trust.jpg
+    klass: centered-text
+    small_title:
+      klass: bottom-to-top
+      text: Hamilton Group
+    title:
+      klass: bottom-to-top
+      text: A Team You Can Trust
+    buttons:
+      klass: bottom-to-top
+      items:
+        - text: Schedule Your Free Consultation
+          link_to: mailto:contact@trusthamilton.com
+  - bg: images/home/design-you-can-trust.jpg
+    klass: centered-text
+    small_title:
+      klass: bottom-to-top
+      text: Hamilton Group
+    title:
+      klass: bottom-to-top
+      text: A Design You Can Trust
+    buttons:
+      klass: bottom-to-top
+      items:
+        - text: Schedule Your Free Consultation
+          link_to: mailto:contact@trusthamilton.com
+  - bg: images/home/home-you-can-trust.jpg
+    klass: centered-text
+    small_title:
+      klass: bottom-to-top
+      text: Hamilton Group
+    title:
+      klass: bottom-to-top
+      text: A Home You Can Trust
+    buttons:
+      klass: bottom-to-top
+      items:
+        - text: Schedule Your Free Consultation
+          link_to: mailto:contact@trusthamilton.com
 ---
+<div class='mod modDefaultSlider' style="height: 100% !important;">
+  <div class='sequence' data-autostop='off' data-timeout='5000' style="height: 100% !important;">
+    <a class='sequence-prev' href='javascript:void(0);'>
+      <span></span>
+    </a>
+    <a class='sequence-next' href='javascript:void(0);'>
+      <span></span>
+    </a>
+    <ul id="homebuilders" class='sequence-pagination'>
+      {% for slide in page.slides %}
+        {% if forloop.first %}
+          {% assign class = 'current' %}
+        {% else %}
+          {% assign class = '' %}
+        {% endif %}
+        <li class="{{class}}"></li>
+      {% endfor %}
+    </ul>
+    <ul class='sequence-canvas'>
+      {% for slide in page.slides %}
+        {% if forloop.first %}
+          {% assign style = 'static' %}
+        {% else %}
+          {% assign style = '' %}
+        {% endif %}
 
-<div class='full parallax' style='background-image: url(images/@stock/service-page-header.jpg); color: #fff;'>
-  <div class='row'>
-    <div class='large-12 columns'>
-      {% include section-header.html title="Our services" tagline="Get to know what we do" color="#fff" class="big" %}
-    </div>
+        <li class='frame {{style}} {{ slide.klass }}'>
+          <div class='bg' style='background-image: url({{ slide.bg}});'></div>
+          <div class='small-title {{ slide.small_title.klass }}' style="margin-top: 102px; text-shadow: 2px 2px 2px #000">
+            <div class='row'>
+              <div class='large-12 columns'>
+                <h2 style="font-size: 3rem;">{{ slide.small_title.text }}</h2>
+              </div>
+            </div>
+          </div>
+          <div class='title {{ slide.title.klass }}' style="text-shadow: 2px 2px 2px #000">
+            <div class='row'>
+              <div class='large-12 columns'>
+                <h2>{{ slide.title.text }}</h2>
+              </div>
+            </div>
+          </div>
+          <div class='buttons-wrapper {{ slide.buttons.klass }}'>
+            <div class='row'>
+              <div class='large-12 columns'>
+                <div class='two spacing'></div>
+                {% for button in slide.buttons.items %}
+                  <a class='button {{ button.klass }}' href='{{ button.link_to }}'>{{ button.text }}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
   </div>
-  <div class='four spacing'></div>
 </div>
-
 
 <div class='full'>
   <div class='row'>
@@ -65,6 +160,24 @@ services_right:
           <div class='two spacing'></div>
         </div>
       {% endfor %}
+    </div>
+  </div>
+  <div class='spacing'></div>
+</div>
+
+<div class='full no-padding' style='background: #fff'>
+  <div class='two spacing'></div>
+  <div class='mod modCallToAction'>
+    <div class='row'>
+      <div class='medium-9 large-9 columns'>
+        <p>Like what you see here? Contact us to kickoff your project.</p>
+      </div>
+      <div class='medium-3 large-3 columns'>
+        <a class='button' href='mailto:contact@trusthamilton.com'>Contact Us</a>
+      </div>
+    </div>
+    <div class="row" style="text-align: center;">
+      <a href="https://www.google.com/maps/place/Scott+Hamilton+Custom+Builder/@32.5239656,-94.6940699,17z/data=!4m13!1m7!3m6!1s0x8636472405aca26d:0x8f91a36152579715!2s1625+E+Loop+281,+Longview,+TX+75605!3b1!8m2!3d32.5239656!4d-94.6918812!3m4!1s0x8636472127619ddd:0x9fc537a91042249!8m2!3d32.522825!4d-94.688909">1625 E. Loop 281 Longview, Tx 75605</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="tel">(903) 738-4741</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="mailto:contact@trusthamilton.com">contact@trusthamilton.com</a>
     </div>
   </div>
   <div class='spacing'></div>
