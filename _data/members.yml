@@ -1,4 +1,6 @@
-  - avatar: "images/team/Scott_Hamilton.jpg"
+  ---
+  -
+    avatar: "images/team/Scott_Hamilton.jpg"
   name: Scott Hamilton
   position: Founder
   socials:
