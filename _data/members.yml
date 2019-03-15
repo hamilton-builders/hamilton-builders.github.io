@@ -1,6 +1,5 @@
   ---
-  -
-    avatar: "images/team/Scott_Hamilton.jpg"
+ - avatar: images/team/Scott_Hamilton.jpg
   name: Scott Hamilton
   position: Founder
   socials:
@@ -9,8 +8,8 @@
     - link: https://www.facebook.com/Hamilton-Custom-Homes-173390652689644/
       icon: facebook
   desc:
-    I was fortunate to learn this business from childhood by working for my father, Frank Hamilton, a highly respected homebuilder of Longview. Since forming my own company in 1990, I have been further blessed by success in work that I love and that enhances my home town. I hold the Graduate Master Builder designation from the National Association of Homebuilders, and my employees and associates are similarly qualified in their respective fields. To stay abreast of current methods, materials, and styles, we regularly attend professional seminars and trade shows.
-  - avatar: "images/team/Renee_Hamilton.jpg"
+      I was fortunate to learn this business from childhood by working for my father, Frank Hamilton, a highly respected homebuilder of Longview. Since forming my own company in 1990, I have been further blessed by success in work that I love and that enhances my home town. I hold the Graduate Master Builder designation from the National Association of Homebuilders, and my employees and associates are similarly qualified in their respective fields. To stay abreast of current methods, materials, and styles, we regularly attend professional seminars and trade shows.
+- avatar: images/team/Renee_Hamilton.jpg
   name: Reneé Hamilton
   position: Accounting/Finance
   socials:
@@ -21,8 +20,8 @@
     - link: http://dribbble.com
       icon: dribbble
   desc:
-    Renee’ Perkins Hamilton began the foundation to her construction career when she married Scott Hamilton in 1984. Renee’ was raised in Longview and graduated from Pine Tree High School and continued her education with an Associate Degree from Kilgore College and a BS in Education from UT Tyler.
-  - avatar: "images/team/Mindy_Hamilton.jpg"
+      Renee’ Perkins Hamilton began the foundation to her construction career when she married Scott Hamilton in 1984. Renee’ was raised in Longview and graduated from Pine Tree High School and continued her education with an Associate Degree from Kilgore College and a BS in Education from UT Tyler.
+- avatar: images/team/Mindy_Hamilton.jpg
   name: Mindy Hamilton
   position: Client Coordinator
   socials:
@@ -33,8 +32,8 @@
     - link: http://tumblr.com
       icon: tumblr
   desc:
-    Mindy Hamilton is the Client Coordinator for Hamilton Custom Homes. She is the daughter of Scott and Renee’ Hamilton making her the 3rd generation of Hamilton to build homes in the greater Longview area. Mindy is a 2011 Suma Cum Laude graduate of East Texas Baptist University with a Bachelor’s Degree in Business Administration. Upon completion of her college degree, Mindy joined the company to assist with client selections, blueprint drawings, home and interior design, and marketing. She graduated from Texas A&M Texarkana in 2017 with her Masters in Business Administration, and is a member of Alpha Chi and Delta Mu Delta honors societies.
-  - avatar: "images/team/Marshal_Hamilton.jpg"
+       Mindy Hamilton is the Client Coordinator for Hamilton Custom Homes. She is the daughter of Scott and Renee’ Hamilton making her the 3rd generation of Hamilton to build homes in the greater Longview area. Mindy is a 2011 Suma Cum Laude graduate of East Texas Baptist University with a Bachelor’s Degree in Business Administration. Upon completion of her college degree, Mindy joined the company to assist with client selections, blueprint drawings, home and interior design, and marketing. She graduated from Texas A&M Texarkana in 2017 with her Masters in Business Administration, and is a member of Alpha Chi and Delta Mu Delta honors societies.
+- avatar: images/team/Marshal_Hamilton.jpg
   name: Marshal hamilton
   position: VP Commercial development
   socials:
@@ -44,10 +43,11 @@
       icon: facebook
     - link: https://tumblr
       icon: tumblr
-  desc: Marshal Hamilton, Scott & Renee’s son, is another addition to the 3rd generation of Hamilton builders and key member of the Hamilton team. Marshal graduated from LeTourneau University in 2010 with his Bachelors Degree in Business Administration. While working towards his degree, Marshal performed as a project manager for residential projects in the area. 
-        He now serves as Vice President of commercial sales for our newest division, Huffman Builders of East Texas, a full service medical and professional offices provider.
-        Marshal resides with his wife and two sons in Longview. He enjoys spending time with his family, Crossfit, any activity related to the great outdoors.
-  - avatar: "images/team/Gary Bort-Senior designer.jpg"
+  desc: 
+      Marshal Hamilton, Scott & Renee’s son, is another addition to the 3rd generation of Hamilton builders and key member of the Hamilton team. Marshal graduated from LeTourneau University in 2010 with his Bachelors Degree in Business Administration. While working towards his degree, Marshal performed as a project manager for residential projects in the area. 
+      He now serves as Vice President of commercial sales for our newest division, Huffman Builders of East Texas, a full service medical and professional offices provider.
+      Marshal resides with his wife and two sons in Longview. He enjoys spending time with his family, Crossfit, any activity related to the great outdoors.
+- avatar: images/team/Gary Bort-Senior designer.jpg
   name: Gary_Bort.jpg
   position: Senior Designer
   socials:
@@ -57,10 +57,11 @@
       icon: facebook
     - link: https://tumblr
       icon: tumblr
-  desc: Gary Bort, from Syracuse, New York, joins the Hamilton team as Senior Designer. Gary's experience in the building industry spans over 30 years as a framer, remodeler, roofer, trim carpenter, and most importantly, as a residential designer. His knowledge and understanding of the various trades provides the perfect combination for superior coordinated design.
-        Gary graduated from Onondaga Community College in 1994 with an Associates Degree in Architecture. Upon graduation, Gary began his architectural design career with Harry Crouse in Kilgore, TX. While in his employ, Gary began designing luxury custom homes. Since that time, Gary has designed several custom homes for Scott Hamilton Custom Builder, and many of our customers remain in those same homes today.
-        Gary has been married 15 years to his wife, Tanya, and has 4 children. He is actively involved in the community, and enjoys coaching his kids' and grandson's baseball teams.
-  - avatar: "images/team/Lonnie Stanley-Lead Estimator.jpg"
+  desc: 
+      Gary Bort, from Syracuse, New York, joins the Hamilton team as Senior Designer. Gary's experience in the building industry spans over 30 years as a framer, remodeler, roofer, trim carpenter, and most importantly, as a residential designer. His knowledge and understanding of the various trades provides the perfect combination for superior coordinated design.
+      Gary graduated from Onondaga Community College in 1994 with an Associates Degree in Architecture. Upon graduation, Gary began his architectural design career with Harry Crouse in Kilgore, TX. While in his employ, Gary began designing luxury custom homes. Since that time, Gary has designed several custom homes for Scott Hamilton Custom Builder, and many of our customers remain in those same homes today.
+      Gary has been married 15 years to his wife, Tanya, and has 4 children. He is actively involved in the community, and enjoys coaching his kids' and grandson's baseball teams.
+- avatar: images/team/Lonnie Stanley-Lead Estimator.jpg
   name: Lonnie Stanley
   position: Lead Estimator
   socials:
@@ -70,14 +71,15 @@
       icon: facebook
     - link: https://tumblr
       icon: tumblr
-  desc: Lonnie Stanley comes to the Hamilton Team to assist with estimating and purchase orders. Lonnie, former project estimator at Eastman Chemical Company, has implemented his vast knowledge and experience in estimating and software programming, and is an integral part of the Hamilton Team. In his spare time, Lonnie enjoys creating custom web designs and spending time with his wife and two daughters.
-    - avatar: "images/team/becky.png"
-    name: Becky Swearingen
-    position: Interior Designer
-    socials:
-      - link: https://twitter.com
-        icon: twitter
-      - link: https://www.facebook.com/Hamilton-Custom-Homes-173390652689644/
-        icon: facebook
-        desc:
-          "You do not really know someone until you have walked a mile in their shoes"
+  desc: 
+      Lonnie Stanley comes to the Hamilton Team to assist with estimating and purchase orders. Lonnie, former project estimator at Eastman Chemical Company, has implemented his vast knowledge and experience in estimating and software programming, and is an integral part of the Hamilton Team. In his spare time, Lonnie enjoys creating custom web designs and spending time with his wife and two daughters.
+- avatar: images/team/becky.png
+  name: Becky Swearingen
+  position: Interior Designer
+  socials:
+    - link: https://twitter.com
+      icon: twitter
+    - link: https://www.facebook.com/Hamilton-Custom-Homes-173390652689644/
+      icon: facebook
+  desc:
+    "You do not really know someone until you have walked a mile in their shoes"
